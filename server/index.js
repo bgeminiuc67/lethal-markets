@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const Anthropic = require('@anthropic-ai/sdk').default;
 require('dotenv').config();
 
 const app = express();
@@ -37,15 +38,12 @@ app.get('/health', (req, res) => {
 app.post('/api/analyze-crisis', async (req, res) => {
   try {
     // Validate request
-    if (!process.env.REPLICATE_API_TOKEN) {
+    if (!process.env.ANTHROPIC_API_KEY) {
       return res.status(500).json({ error: 'Server configuration error' });
     }
 
-    // Import Replicate (dynamic import for security)
-    const Replicate = (await import('replicate')).default;
-    
-    const replicate = new Replicate({
-      auth: process.env.REPLICATE_API_TOKEN, // Server-side only!
+    const anthropic = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY, // Server-side only!
     });
 
     const prompt = `Analyze current global crises and conflicts as of ${new Date().toISOString().split('T')[0]}. 
@@ -92,12 +90,19 @@ Focus on:
 
 Return ONLY valid JSON.`;
 
-    console.log('Making secure API call to GPT-5...');
+    console.log('Making secure API call to Claude...');
     
-    const input = { prompt };
-    const output = await replicate.run("openai/gpt-5", { input });
+    const message = await anthropic.messages.create({
+      model: 'claude-3-5-sonnet-20241022',
+      max_tokens: 4096,
+      temperature: 0.3,
+      messages: [{
+        role: 'user',
+        content: prompt
+      }]
+    });
     
-    const responseText = Array.isArray(output) ? output.join('') : String(output);
+    const responseText = message.content[0].text;
     
     // Clean and validate JSON response
     const cleanedResponse = cleanJsonResponse(responseText);
@@ -221,13 +226,12 @@ app.post('/api/analyze-financial', async (req, res) => {
     }
 
     // Validate request
-    if (!process.env.REPLICATE_API_TOKEN) {
+    if (!process.env.ANTHROPIC_API_KEY) {
       return res.status(500).json({ error: 'Server configuration error' });
     }
 
-    const Replicate = (await import('replicate')).default;
-    const replicate = new Replicate({
-      auth: process.env.REPLICATE_API_TOKEN,
+    const anthropic = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY,
     });
 
     let prompt = '';
@@ -296,9 +300,17 @@ app.post('/api/analyze-financial', async (req, res) => {
       Provide 8-12 high-confidence signals with clear entry/exit strategies.`;
     }
 
-    const input = { prompt };
-    const output = await replicate.run("openai/gpt-5", { input });
-    const responseText = Array.isArray(output) ? output.join('') : String(output);
+    const message = await anthropic.messages.create({
+      model: 'claude-3-5-sonnet-20241022',
+      max_tokens: 4096,
+      temperature: 0.3,
+      messages: [{
+        role: 'user',
+        content: prompt
+      }]
+    });
+    
+    const responseText = message.content[0].text;
     
     // Clean and parse JSON
     const cleanedResponse = cleanJsonResponse(responseText);
@@ -328,7 +340,8 @@ app.post('/api/analyze-financial', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🔒 Secure Unethical server running on port ${PORT}`);
+  console.log(`🔒 Secure Lethal Markets server running on port ${PORT}`);
   console.log(`🛡️ API key properly hidden on server-side`);
   console.log(`💰 Financial intelligence endpoints active`);
+  console.log(`🤖 Claude AI integration active`);
 });
