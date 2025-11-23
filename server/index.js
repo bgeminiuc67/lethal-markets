@@ -20,7 +20,7 @@ app.use(cors({
 // Rate limiting - prevent API abuse
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // limit each IP to 10 requests per windowMs
+  max: 100, // limit each IP to 100 requests per windowMs (increased for development)
   message: 'Too many requests from this IP, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
@@ -79,6 +79,7 @@ Return JSON (5-7 events):
 Major conflicts: Ukraine, Middle East, China-Taiwan. Include 3-5 companies per crisis with realistic stock data. JSON only.`;
 
     console.log('Making secure API call to Claude...');
+    console.log('Prompt length:', prompt.length);
     
     const message = await anthropic.messages.create({
       model: 'claude-3-5-sonnet-20241022',
@@ -90,7 +91,10 @@ Major conflicts: Ukraine, Middle East, China-Taiwan. Include 3-5 companies per c
       }]
     });
     
+    console.log('Claude response received');
     const responseText = message.content[0].text;
+    console.log('Response length:', responseText.length);
+    console.log('First 200 chars:', responseText.substring(0, 200));
     
     // Clean and validate JSON response
     const cleanedResponse = cleanJsonResponse(responseText);
@@ -116,6 +120,10 @@ Major conflicts: Ukraine, Middle East, China-Taiwan. Include 3-5 companies per c
 
   } catch (error) {
     console.error('Crisis analysis error:', error);
+    console.error('Error details:', error.message);
+    if (error.response) {
+      console.error('API Response:', error.response);
+    }
     
     // Don't expose internal errors to client
     res.status(500).json({ 

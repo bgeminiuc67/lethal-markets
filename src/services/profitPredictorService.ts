@@ -1,7 +1,21 @@
 // Real Crisis Profit Predictor Service
 import { ProfitOpportunity, TradingSignal } from '@/types/financial';
 import { dataValidator } from './dataValidator';
-import { CrisisEvent, CrisisCompany } from './gptCrisisService';
+import { CrisisEvent } from './secureApiService';
+
+// Company interface for crisis events
+export interface CrisisCompany {
+  name: string;
+  symbol: string;
+  price: number;
+  change: number;
+  changePercent: number;
+  role: string;
+  category: string;
+  involvement: string;
+  impact: string;
+  confidence: number;
+}
 
 export interface RealTimeOpportunity {
   symbol: string;

@@ -18,7 +18,7 @@ import {
   Zap
 } from 'lucide-react';
 import { profitPredictorService, RealTimeOpportunity, MarketSector } from '@/services/profitPredictorService';
-import { GPTCrisisService } from '@/services/gptCrisisService';
+import { fastApiService } from '@/services/fastApiService';
 
 export const ProfitPredictorPanel: React.FC = () => {
   const [opportunities, setOpportunities] = useState<RealTimeOpportunity[]>([]);
@@ -34,8 +34,7 @@ export const ProfitPredictorPanel: React.FC = () => {
 
     try {
       // Get current crisis data
-      const gptService = GPTCrisisService.getInstance();
-      const crisisData = await gptService.getAllCrisisData();
+      const crisisData = await fastApiService.getCrisisData();
 
       if (!crisisData || crisisData.events.length === 0) {
         setError('No crisis data available for analysis');

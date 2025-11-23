@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { TradingSignal } from '@/types/financial';
 import { profitPredictorService } from '@/services/profitPredictorService';
-import { GPTCrisisService } from '@/services/gptCrisisService';
+import { fastApiService } from '@/services/fastApiService';
 
 export const TradingSignalsPanel: React.FC = () => {
   const [signals, setSignals] = useState<TradingSignal[]>([]);
@@ -31,8 +31,7 @@ export const TradingSignalsPanel: React.FC = () => {
 
     try {
       // Get current crisis data
-      const gptService = GPTCrisisService.getInstance();
-      const crisisData = await gptService.getAllCrisisData();
+      const crisisData = await fastApiService.getCrisisData();
 
       if (!crisisData || crisisData.events.length === 0) {
         setError('No crisis data available for signal generation');
