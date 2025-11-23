@@ -46,49 +46,37 @@ app.post('/api/analyze-crisis', async (req, res) => {
       apiKey: process.env.ANTHROPIC_API_KEY, // Server-side only!
     });
 
-    const prompt = `Analyze current global crises and conflicts as of ${new Date().toISOString().split('T')[0]}. 
+    const prompt = `Current global crises (${new Date().toISOString().split('T')[0]}) with profiteering companies.
 
-Provide a comprehensive analysis in JSON format with the following structure:
-
+Return JSON (5-7 events):
 {
-  "events": [
-    {
-      "id": 1,
-      "title": "Crisis Title",
-      "description": "Detailed description",
-      "date": "2024-XX-XX",
-      "type": "War|Natural Disaster|Political Crisis|Economic Crisis",
-      "severity": "Critical|High|Medium|Low",
-      "location": "Country/Region",
-      "status": "Ongoing|Escalating|De-escalating|Resolved",
-      "riskScore": 85,
-      "marketImpact": -2.5,
-      "companies": [
-        {
-          "name": "Company Name",
-          "symbol": "TICKER",
-          "price": 150.25,
-          "change": 5.75,
-          "changePercent": 3.98,
-          "category": "Arms Supplier|Energy|Cleanup|Insurance|Technology",
-          "role": "How they're involved",
-          "involvement": "Detailed involvement",
-          "impact": "Expected impact on company",
-          "confidence": 0.8
-        }
-      ]
-    }
-  ]
+  "events": [{
+    "id": 1,
+    "title": "Crisis name",
+    "description": "Brief desc",
+    "date": "2024-XX-XX",
+    "type": "War|Natural Disaster|Political Crisis|Economic Crisis",
+    "severity": "Critical|High|Medium|Low",
+    "location": "Region",
+    "status": "Ongoing|Escalating|De-escalating",
+    "riskScore": 85,
+    "marketImpact": -2.5,
+    "companies": [{
+      "name": "Company",
+      "symbol": "TICK",
+      "price": 150.25,
+      "change": 5.75,
+      "changePercent": 3.98,
+      "category": "Arms Supplier|Energy|Cleanup|Insurance|Technology",
+      "role": "Role",
+      "involvement": "How involved",
+      "impact": "Impact",
+      "confidence": 0.8
+    }]
+  }]
 }
 
-Focus on:
-1. Current major conflicts (Ukraine, Middle East, etc.)
-2. Companies that profit from these crises
-3. Realistic stock prices and recent changes
-4. Risk assessment and market impact
-5. Corporate involvement and profiteering
-
-Return ONLY valid JSON.`;
+Major conflicts: Ukraine, Middle East, China-Taiwan. Include 3-5 companies per crisis with realistic stock data. JSON only.`;
 
     console.log('Making secure API call to Claude...');
     
@@ -237,67 +225,50 @@ app.post('/api/analyze-financial', async (req, res) => {
     let prompt = '';
     
     if (analysisType === 'profit-opportunities') {
-      prompt = `Based on these crisis events: ${JSON.stringify(crisisData.events.slice(0, 3))}, 
-      analyze profit opportunities for investors. Focus on companies that will benefit from these crises.
-      
-      For each opportunity, provide realistic current stock prices and detailed analysis.
-      
-      Return JSON with:
-      {
-        "opportunities": [
-          {
-            "symbol": "TICKER",
-            "companyName": "Company Name",
-            "currentPrice": 125.50,
-            "profitProbability": 75,
-            "expectedReturn": 15.5,
-            "timeToProfit": 30,
-            "crisisContext": "Which crisis creates this opportunity",
-            "investmentThesis": "Detailed explanation of why this company will profit from the crisis",
-            "riskFactors": ["Specific risk 1", "Specific risk 2", "Specific risk 3"],
-            "targetPrice": 150.00,
-            "stopLoss": 110.00,
-            "confidence": 80
-          }
-        ]
-      }
-      
-      Focus on:
-      1. Defense contractors during conflicts
-      2. Energy companies during supply disruptions
-      3. Construction companies for post-crisis rebuilding
-      4. Healthcare companies during health crises
-      5. Technology companies providing crisis solutions
-      
-      Provide 10-15 high-quality opportunities with realistic data.`;
+      prompt = `Analyze profit opportunities from these crises: ${JSON.stringify(crisisData.events.slice(0, 3))}.
+
+Return JSON (10-12 opportunities):
+{
+  "opportunities": [{
+    "symbol": "TICKER",
+    "companyName": "Name",
+    "currentPrice": 125.50,
+    "profitProbability": 75,
+    "expectedReturn": 15.5,
+    "timeToProfit": 30,
+    "crisisContext": "Crisis link",
+    "investmentThesis": "Why profitable",
+    "riskFactors": ["risk1", "risk2", "risk3"],
+    "targetPrice": 150.00,
+    "stopLoss": 110.00,
+    "confidence": 80
+  }]
+}
+
+Focus: Defense, Energy, Construction, Healthcare, Tech. Realistic prices only.`;
     } else if (analysisType === 'trading-signals') {
-      prompt = `Generate trading signals based on crisis data: ${JSON.stringify(crisisData.events.slice(0, 2))}.
-      
-      Provide actionable buy/sell recommendations with realistic prices and detailed reasoning.
-      
-      Return JSON with:
-      {
-        "signals": [
-          {
-            "symbol": "TICKER",
-            "action": "BUY|SELL|HOLD|STRONG_BUY|STRONG_SELL",
-            "confidence": 85,
-            "targetPrice": 150.00,
-            "stopLoss": 130.00,
-            "timeHorizon": "short|medium|long",
-            "reasoning": "Detailed explanation of why this trade makes sense based on crisis analysis",
-            "expectedReturn": 12.5,
-            "riskLevel": "low|medium|high|extreme",
-            "crisisTrigger": "Which crisis event triggered this signal",
-            "optimisticReturn": 18.0,
-            "pessimisticReturn": 8.0,
-            "mostLikelyReturn": 12.5
-          }
-        ]
-      }
-      
-      Focus on companies that will be immediately impacted by the crises.
-      Provide 8-12 high-confidence signals with clear entry/exit strategies.`;
+      prompt = `Trading signals from: ${JSON.stringify(crisisData.events.slice(0, 2))}.
+
+Return JSON (8-10 signals):
+{
+  "signals": [{
+    "symbol": "TICKER",
+    "action": "BUY|SELL|STRONG_BUY|STRONG_SELL|HOLD",
+    "confidence": 85,
+    "targetPrice": 150.00,
+    "stopLoss": 130.00,
+    "timeHorizon": "short|medium|long",
+    "reasoning": "Why this trade",
+    "expectedReturn": 12.5,
+    "riskLevel": "low|medium|high|extreme",
+    "crisisTrigger": "Crisis cause",
+    "optimisticReturn": 18.0,
+    "pessimisticReturn": 8.0,
+    "mostLikelyReturn": 12.5
+  }]
+}
+
+High-confidence signals only.`;
     }
 
     const message = await anthropic.messages.create({

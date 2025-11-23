@@ -69,7 +69,7 @@ export class ProfitPredictorService {
       const opportunities: RealTimeOpportunity[] = (data.opportunities || []).map((opp: any) => ({
         symbol: opp.symbol,
         companyName: opp.companyName,
-        currentPrice: opp.currentPrice || 100, // GPT-5 will provide realistic prices
+        currentPrice: opp.currentPrice || 100, // Claude will provide realistic prices
         profitProbability: opp.profitProbability,
         expectedReturn: opp.expectedReturn,
         timeToProfit: opp.timeToProfit,
@@ -97,9 +97,9 @@ export class ProfitPredictorService {
     }
   }
 
-  // This method is no longer needed - GPT-5 handles all analysis
+  // This method is no longer needed - Claude handles all analysis
 
-  // Remove external API methods - GPT-5 will provide all data
+  // Remove external API methods - Claude will provide all data
 
   private async calculateProfitMetrics(
     company: CrisisCompany, 
