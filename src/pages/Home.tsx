@@ -126,7 +126,7 @@ export const Home: React.FC = () => {
           <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <Zap className="h-4 w-4 text-yellow-500" />
-              GPT-5 Powered
+              Claude AI Powered
             </div>
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-green-500" />

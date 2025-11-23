@@ -142,7 +142,7 @@ export const GPTCrisisDashboard: React.FC = () => {
               Lethal Markets
             </h1>
             <p className="text-muted-foreground">
-              Exposing corporate profiteering from global crises • Powered by GPT-5
+              Exposing corporate profiteering from global crises • Powered by Claude AI
             </p>
           </div>
           

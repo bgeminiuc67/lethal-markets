@@ -1,7 +1,7 @@
 # 🚀 Lethal Markets - Ultra-Fast Setup
 
 ## What This Does
-- **Finds current global conflicts** using GPT-5 AI
+- **Finds current global conflicts** using Claude AI
 - **Identifies involved companies** and their stock tickers
 - **Shows real-time stock impact** from conflicts
 - **Analyzes company involvement** (arms suppliers, cleanup contractors, etc.)
@@ -26,7 +26,7 @@ The app will:
 
 ## 🎯 How It Works
 
-### Single GPT-5 Call Gets Everything:
+### Single Claude Call Gets Everything:
 1. **Current conflicts** (Ukraine, Middle East, etc.)
 2. **Involved companies** with stock tickers
 3. **Stock prices** and recent changes
@@ -37,7 +37,7 @@ The app will:
 - ❌ No NewsAPI key required
 - ❌ No stock API key required  
 - ❌ No complex setup
-- ✅ Just GPT-5 does everything!
+- ✅ Just Claude does everything!
 
 ## 🔥 Features
 
@@ -65,7 +65,7 @@ The app will:
 
 This gives you a **complete crisis tracking platform** in minutes:
 
-1. **Data Source**: GPT-5 finds all current conflicts
+1. **Data Source**: Claude finds all current conflicts
 2. **Company Analysis**: AI identifies involved companies
 3. **Stock Impact**: Shows how conflicts affect markets
 4. **Risk Assessment**: Calculates danger levels
@@ -94,7 +94,7 @@ VITE_FINNHUB_API_KEY=your_key_here
 ## 🎯 Perfect for Hackathons
 
 - ✅ **Fast setup** (under 5 minutes)
-- ✅ **Real data** from GPT-5
+- ✅ **Real data** from Claude
 - ✅ **Professional UI** 
 - ✅ **Impressive demo** potential
 - ✅ **Scalable architecture**
@@ -108,7 +108,7 @@ VITE_FINNHUB_API_KEY=your_key_here
 3. Check that your Replicate API key is working
 4. Try `npm run dev` directly
 
-**If GPT-5 responses are slow:**
+**If Claude responses are slow:**
 - The first call takes 10-30 seconds
 - Subsequent calls are cached for 10 minutes
 - This is normal for AI analysis

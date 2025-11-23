@@ -2,11 +2,11 @@
 
 **AI-powered platform exposing corporate profiteering from global crises**
 
-Lethal Markets uses GPT-5 to analyze real-time global conflicts and reveal which companies profit from human suffering. Track defense contractors, energy giants, and other corporations that benefit from wars, disasters, and political instability.
+Lethal Markets uses Claude to analyze real-time global conflicts and reveal which companies profit from human suffering. Track defense contractors, energy giants, and other corporations that benefit from wars, disasters, and political instability.
 
 ## 🎯 What It Does
 
-- **🔍 Crisis Detection**: GPT-5 identifies current global conflicts and disasters
+- **🔍 Crisis Detection**: Claude identifies current global conflicts and disasters
 - **🏢 Corporate Exposure**: Reveals companies profiting from crises (arms dealers, contractors, etc.)
 - **📈 Stock Impact**: Shows how conflicts boost certain company valuations
 - **⚠️ Risk Analysis**: Calculates danger levels and market volatility
@@ -22,7 +22,7 @@ Lethal Markets uses GPT-5 to analyze real-time global conflicts and reveal which
 - Market volatility predictions
 
 ### AI-Powered Analysis
-- **GPT-5 Integration**: Advanced conflict analysis
+- **Claude Integration**: Advanced conflict analysis
 - **Company Classification**: Arms suppliers vs. solution providers
 - **Financial Impact**: Stock price correlations with conflicts
 - **Predictive Insights**: Market trend forecasting
@@ -37,7 +37,7 @@ Lethal Markets uses GPT-5 to analyze real-time global conflicts and reveal which
 
 - **Frontend**: React + TypeScript + Vite
 - **Backend**: Node.js + Express (secure API proxy)
-- **AI**: GPT-5 via Replicate API
+- **AI**: Claude via Anthropic API
 - **UI**: shadcn/ui + Tailwind CSS
 - **Charts**: Recharts for data visualization
 - **Security**: Helmet, CORS, Rate limiting
@@ -56,7 +56,7 @@ Lethal Markets uses GPT-5 to analyze real-time global conflicts and reveal which
 ```
 Frontend (React) → Secure Backend (Express) → Replicate API
      ↓                    ↓                      ↓
-No API keys         Protected keys         Real GPT-5
+No API keys         Protected keys         Real Claude
 Browser safe        Rate limited          Secure calls
 ```
 
@@ -104,7 +104,7 @@ Open `http://localhost:8080` and watch AI expose corporate war profiteering secu
 
 ## 🔥 Demo Highlights
 
-1. **Real GPT-5 Analysis**: Live AI processing of global events
+1. **Real Claude Analysis**: Live AI processing of global events
 2. **Actual Companies**: Lockheed Martin, Raytheon, Exxon, etc.
 3. **Live Stock Data**: Real price changes and market impact
 4. **Professional UI**: Hackathon-ready dashboard
@@ -119,7 +119,7 @@ Open `http://localhost:8080` and watch AI expose corporate war profiteering secu
 ## 🏆 Built For Hackathons
 
 This project demonstrates:
-- ✅ **Advanced AI Integration** (GPT-5)
+- ✅ **Advanced AI Integration** (Claude)
 - ✅ **Real-world Problem Solving** (corporate accountability)
 - ✅ **Technical Excellence** (React + TypeScript + AI)
 - ✅ **Social Impact** (exposing unethical profiteering)
